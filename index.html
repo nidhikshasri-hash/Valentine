@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💘</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffb6c1, #ffe6eb);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    text-align: center;
+}
+
+h1 {
+    color: #b30047;
+    font-size: 2.5rem;
+    z-index: 2;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#start {
+    background-color: #ff3366;
+    color: white;
+}
+
+#yes {
+    background-color: #e6005c;
+    color: white;
+}
+
+#no {
+    background-color: gray;
+    color: white;
+    position: absolute;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 4s linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>💘 Will you be my Valentine? 💘</h1>
+
+<button id="start">Start 💕</button>
+
+<div id="proposal" style="display:none;">
+    <button id="yes">Definitely YES 😍</button>
+    <button id="no">No 🙈</button>
+</div>
+
+<!-- Tamil Song -->
+<audio id="music" loop>
+    <source src="ondrai_rendai_aasaigal.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+</audio>
+
+<script>
+const startBtn = document.getElementById("start");
+const proposal = document.getElementById("proposal");
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const music = document.getElementById("music");
+
+let scale = 1;
+
+// Start button
+startBtn.onclick = function () {
+    startBtn.style.display = "none";
+    proposal.style.display = "block";
+    music.volume = 0.7;
+    music.play();
+};
+
+// Yes button
+yesBtn.onclick = function () {
+    alert("💖 Yayyy! I knew it 😘 Happy Valentine’s Day! 💐");
+};
+
+// No button runs away + Yes grows
+noBtn.onmouseover = function () {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    scale += 0.15;
+    yesBtn.style.transform = "scale(" + scale + ")";
+};
+
+// Floating hearts
+setInterval(function () {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+}, 300);
+</script>
+
+</body>
+</html>
